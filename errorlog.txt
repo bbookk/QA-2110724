@@ -1,0 +1,310 @@
+Log Time: 19-10-2019 00:57:08am
+Error: Call to a member function bind_param() on bool in C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php:141
+Stack trace:
+#0 C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php(39): DBConnection::serviceAuthentication('0123444667')
+#1 C:\xampp\htdocs\integration2\src\serviceauthentication\serviceauthentication.php(8): DBConnection::accountInformationProvider('0123444667')
+#2 C:\xampp\htdocs\integration2\src\controller.php(73): ServiceAuthentication::accountAuthenticationProvider('0123444667')
+#3 {main}
+
+Log Time: 19-10-2019 00:58:12am
+Error: Call to a member function bind_param() on bool in C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php:170
+Stack trace:
+#0 C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php(44): DBConnection::userAuthentication('0123444667', '4563')
+#1 C:\xampp\htdocs\integration2\src\authentication\authentication.php(30): DBConnection::accountInformationProvider('0123444667', '4563')
+#2 C:\xampp\htdocs\integration2\src\controller.php(41): Operation\Authentication->login()
+#3 {main}
+
+Log Time: 19-10-2019 00:58:24am
+Error: Call to a member function bind_param() on bool in C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php:170
+Stack trace:
+#0 C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php(44): DBConnection::userAuthentication('0123444667', '4563')
+#1 C:\xampp\htdocs\integration2\src\authentication\authentication.php(30): DBConnection::accountInformationProvider('0123444667', '4563')
+#2 C:\xampp\htdocs\integration2\src\controller.php(41): Operation\Authentication->login()
+#3 {main}
+
+Log Time: 19-10-2019 00:59:19am
+Error: Call to a member function bind_param() on bool in C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php:170
+Stack trace:
+#0 C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php(44): DBConnection::userAuthentication('0123444667', '4563')
+#1 C:\xampp\htdocs\integration2\src\authentication\authentication.php(30): DBConnection::accountInformationProvider('0123444667', '4563')
+#2 C:\xampp\htdocs\integration2\src\controller.php(41): Operation\Authentication->login()
+#3 {main}
+
+Log Time: 19-10-2019 01:02:30am
+Error: Call to a member function bind_param() on bool in C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php:170
+Stack trace:
+#0 C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php(44): DBConnection::userAuthentication('0123444667', '4563')
+#1 C:\xampp\htdocs\integration2\src\authentication\authentication.php(30): DBConnection::accountInformationProvider('0123444667', '4563')
+#2 C:\xampp\htdocs\integration2\src\controller.php(41): Operation\Authentication->login()
+#3 {main}
+
+Log Time: 19-10-2019 01:02:33am
+Error: Call to a member function bind_param() on bool in C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php:170
+Stack trace:
+#0 C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php(44): DBConnection::userAuthentication('0123444667', '4563')
+#1 C:\xampp\htdocs\integration2\src\authentication\authentication.php(30): DBConnection::accountInformationProvider('0123444667', '4563')
+#2 C:\xampp\htdocs\integration2\src\controller.php(41): Operation\Authentication->login()
+#3 {main}
+
+Log Time: 19-10-2019 01:02:34am
+Error: Call to a member function bind_param() on bool in C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php:170
+Stack trace:
+#0 C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php(44): DBConnection::userAuthentication('0123444667', '4563')
+#1 C:\xampp\htdocs\integration2\src\authentication\authentication.php(30): DBConnection::accountInformationProvider('0123444667', '4563')
+#2 C:\xampp\htdocs\integration2\src\controller.php(41): Operation\Authentication->login()
+#3 {main}
+
+Log Time: 19-10-2019 01:02:57am
+Error: Call to a member function bind_param() on bool in C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php:170
+Stack trace:
+#0 C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php(44): DBConnection::userAuthentication('0123444667', '4563')
+#1 C:\xampp\htdocs\integration2\src\authentication\authentication.php(30): DBConnection::accountInformationProvider('0123444667', '4563')
+#2 C:\xampp\htdocs\integration2\src\controller.php(41): Operation\Authentication->login()
+#3 {main}
+
+Log Time: 19-10-2019 01:03:06am
+Error: Call to a member function bind_param() on bool in C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php:170
+Stack trace:
+#0 C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php(44): DBConnection::userAuthentication('0123444667', '4563')
+#1 C:\xampp\htdocs\integration2\src\authentication\authentication.php(30): DBConnection::accountInformationProvider('0123444667', '4563')
+#2 C:\xampp\htdocs\integration2\src\controller.php(41): Operation\Authentication->login()
+#3 {main}
+
+Log Time: 19-10-2019 01:03:23am
+Error: Call to a member function bind_param() on bool in C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php:170
+Stack trace:
+#0 C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php(44): DBConnection::userAuthentication('0123444667', '4563')
+#1 C:\xampp\htdocs\integration2\src\authentication\authentication.php(30): DBConnection::accountInformationProvider('0123444667', '4563')
+#2 C:\xampp\htdocs\integration2\src\controller.php(41): Operation\Authentication->login()
+#3 {main}
+
+Log Time: 19-10-2019 01:06:25am
+Error: Call to a member function bind_param() on bool in C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php:170
+Stack trace:
+#0 C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php(44): DBConnection::userAuthentication('0123444667', '4563')
+#1 C:\xampp\htdocs\integration2\src\authentication\authentication.php(30): DBConnection::accountInformationProvider('0123444667', '4563')
+#2 C:\xampp\htdocs\integration2\src\controller.php(41): Operation\Authentication->login()
+#3 {main}
+
+Log Time: 19-10-2019 01:07:45am
+Error: Call to a member function bind_param() on bool in C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php:141
+Stack trace:
+#0 C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php(39): DBConnection::serviceAuthentication('0123444667')
+#1 C:\xampp\htdocs\integration2\src\serviceauthentication\serviceauthentication.php(8): DBConnection::accountInformationProvider('0123444667')
+#2 C:\xampp\htdocs\integration2\src\controller.php(73): ServiceAuthentication::accountAuthenticationProvider('0123444667')
+#3 {main}
+
+Log Time: 19-10-2019 01:21:40am
+Error: Call to a member function bind_param() on bool in C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php:170
+Stack trace:
+#0 C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php(44): DBConnection::userAuthentication('0123444667', '4563')
+#1 C:\xampp\htdocs\integration2\src\authentication\authentication.php(30): DBConnection::accountInformationProvider('0123444667', '4563')
+#2 C:\xampp\htdocs\integration2\src\controller.php(41): Operation\Authentication->login()
+#3 {main}
+
+Log Time: 19-10-2019 01:21:49am
+Error: Call to a member function bind_param() on bool in C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php:170
+Stack trace:
+#0 C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php(44): DBConnection::userAuthentication('0123444667', '4563')
+#1 C:\xampp\htdocs\integration2\src\authentication\authentication.php(30): DBConnection::accountInformationProvider('0123444667', '4563')
+#2 C:\xampp\htdocs\integration2\src\controller.php(41): Operation\Authentication->login()
+#3 {main}
+
+Log Time: 19-10-2019 09:43:29am
+Error: Call to a member function bind_param() on bool in C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php:170
+Stack trace:
+#0 C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php(44): DBConnection::userAuthentication('0123444667', '4563')
+#1 C:\xampp\htdocs\integration2\src\authentication\authentication.php(30): DBConnection::accountInformationProvider('0123444667', '4563')
+#2 C:\xampp\htdocs\integration2\src\controller.php(41): Operation\Authentication->login()
+#3 {main}
+
+Log Time: 19-10-2019 09:44:11am
+Error: Call to a member function bind_param() on bool in C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php:170
+Stack trace:
+#0 C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php(44): DBConnection::userAuthentication('0123444667', '4563')
+#1 C:\xampp\htdocs\integration2\src\authentication\authentication.php(30): DBConnection::accountInformationProvider('0123444667', '4563')
+#2 C:\xampp\htdocs\integration2\src\controller.php(41): Operation\Authentication->login()
+#3 {main}
+
+Log Time: 19-10-2019 10:18:47am
+TypeError: Return value of DBConnection::userAuthentication() must be of the type array, null returned in C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php:203
+Stack trace:
+#0 C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php(44): DBConnection::userAuthentication('0123444667', '4563')
+#1 C:\xampp\htdocs\integration2\src\authentication\authentication.php(30): DBConnection::accountInformationProvider('0123444667', '4563')
+#2 C:\xampp\htdocs\integration2\src\controller.php(41): Operation\Authentication->login()
+#3 {main}
+
+Log Time: 19-10-2019 11:04:25am
+TypeError: Return value of DBConnection::userAuthentication() must be of the type array, bool returned in C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php:196
+Stack trace:
+#0 C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php(44): DBConnection::userAuthentication('0123444667', '4563')
+#1 C:\xampp\htdocs\integration2\src\authentication\authentication.php(30): DBConnection::accountInformationProvider('0123444667', '4563')
+#2 C:\xampp\htdocs\integration2\src\controller.php(41): Operation\Authentication->login()
+#3 {main}
+
+Log Time: 19-10-2019 11:04:32am
+TypeError: Return value of DBConnection::userAuthentication() must be of the type array, bool returned in C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php:196
+Stack trace:
+#0 C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php(44): DBConnection::userAuthentication('0123444667', '4563')
+#1 C:\xampp\htdocs\integration2\src\authentication\authentication.php(30): DBConnection::accountInformationProvider('0123444667', '4563')
+#2 C:\xampp\htdocs\integration2\src\controller.php(41): Operation\Authentication->login()
+#3 {main}
+
+Log Time: 19-10-2019 11:42:02am
+TypeError: Return value of DBConnection::userAuthentication() must be of the type array, object returned in C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php:204
+Stack trace:
+#0 C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php(44): DBConnection::userAuthentication('0123444667', '4563')
+#1 C:\xampp\htdocs\integration2\src\authentication\authentication.php(30): DBConnection::accountInformationProvider('0123444667', '4563')
+#2 C:\xampp\htdocs\integration2\src\controller.php(41): Operation\Authentication->login()
+#3 {main}
+
+Log Time: 19-10-2019 11:43:41am
+TypeError: Return value of DBConnection::userAuthentication() must be of the type array, object returned in C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php:206
+Stack trace:
+#0 C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php(44): DBConnection::userAuthentication('0123444667', '4563')
+#1 C:\xampp\htdocs\integration2\src\authentication\authentication.php(30): DBConnection::accountInformationProvider('0123444667', '4563')
+#2 C:\xampp\htdocs\integration2\src\controller.php(41): Operation\Authentication->login()
+#3 {main}
+
+Log Time: 19-10-2019 11:45:27am
+TypeError: Return value of DBConnection::userAuthentication() must be of the type array, bool returned in C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php:208
+Stack trace:
+#0 C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php(44): DBConnection::userAuthentication('0123444667', '4563')
+#1 C:\xampp\htdocs\integration2\src\authentication\authentication.php(30): DBConnection::accountInformationProvider('0123444667', '4563')
+#2 C:\xampp\htdocs\integration2\src\controller.php(41): Operation\Authentication->login()
+#3 {main}
+
+Log Time: 19-10-2019 11:50:19am
+TypeError: Return value of DBConnection::userAuthentication() must be of the type array, bool returned in C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php:208
+Stack trace:
+#0 C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php(44): DBConnection::userAuthentication('0123444667', '4563')
+#1 C:\xampp\htdocs\integration2\src\authentication\authentication.php(30): DBConnection::accountInformationProvider('0123444667', '4563')
+#2 C:\xampp\htdocs\integration2\src\controller.php(41): Operation\Authentication->login()
+#3 {main}
+
+Log Time: 19-10-2019 11:59:16am
+Error: Call to a member function execute() on bool in C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php:176
+Stack trace:
+#0 C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php(44): DBConnection::userAuthentication('0123444667', '4563')
+#1 C:\xampp\htdocs\integration2\src\authentication\authentication.php(30): DBConnection::accountInformationProvider('0123444667', '4563')
+#2 C:\xampp\htdocs\integration2\src\controller.php(41): Operation\Authentication->login()
+#3 {main}
+
+Log Time: 19-10-2019 12:10:41pm
+TypeError: Return value of DBConnection::userAuthentication() must be of the type array, bool returned in C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php:208
+Stack trace:
+#0 C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php(44): DBConnection::userAuthentication('0123444667', '4563')
+#1 C:\xampp\htdocs\integration2\src\authentication\authentication.php(30): DBConnection::accountInformationProvider('0123444667', '4563')
+#2 C:\xampp\htdocs\integration2\src\controller.php(41): Operation\Authentication->login()
+#3 {main}
+
+Log Time: 19-10-2019 12:21:30pm
+TypeError: Return value of DBConnection::userAuthentication() must be of the type array, object returned in C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php:208
+Stack trace:
+#0 C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php(44): DBConnection::userAuthentication('0123444667', '4563')
+#1 C:\xampp\htdocs\integration2\src\authentication\authentication.php(30): DBConnection::accountInformationProvider('0123444667', '4563')
+#2 C:\xampp\htdocs\integration2\src\controller.php(41): Operation\Authentication->login()
+#3 {main}
+
+Log Time: 19-10-2019 12:25:09pm
+TypeError: Return value of DBConnection::userAuthentication() must be of the type array, none returned in C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php:209
+Stack trace:
+#0 C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php(44): DBConnection::userAuthentication('0123444667', '4563')
+#1 C:\xampp\htdocs\integration2\src\authentication\authentication.php(30): DBConnection::accountInformationProvider('0123444667', '4563')
+#2 C:\xampp\htdocs\integration2\src\controller.php(41): Operation\Authentication->login()
+#3 {main}
+
+Log Time: 19-10-2019 12:35:30pm
+TypeError: Return value of DBConnection::userAuthentication() must be of the type array, bool returned in C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php:210
+Stack trace:
+#0 C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php(44): DBConnection::userAuthentication('0123444667', '4563')
+#1 C:\xampp\htdocs\integration2\src\authentication\authentication.php(30): DBConnection::accountInformationProvider('0123444667', '4563')
+#2 C:\xampp\htdocs\integration2\src\controller.php(41): Operation\Authentication->login()
+#3 {main}
+
+Log Time: 19-10-2019 12:44:10pm
+TypeError: Return value of DBConnection::userAuthentication() must be of the type array, bool returned in C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php:210
+Stack trace:
+#0 C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php(44): DBConnection::userAuthentication('0123444667', '4563')
+#1 C:\xampp\htdocs\integration2\src\authentication\authentication.php(30): DBConnection::accountInformationProvider('0123444667', '4563')
+#2 C:\xampp\htdocs\integration2\src\controller.php(41): Operation\Authentication->login()
+#3 {main}
+
+Log Time: 19-10-2019 12:44:28pm
+TypeError: Return value of DBConnection::userAuthentication() must be of the type array, bool returned in C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php:210
+Stack trace:
+#0 C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php(44): DBConnection::userAuthentication('0123444667', '4563')
+#1 C:\xampp\htdocs\integration2\src\authentication\authentication.php(30): DBConnection::accountInformationProvider('0123444667', '4563')
+#2 C:\xampp\htdocs\integration2\src\controller.php(41): Operation\Authentication->login()
+#3 {main}
+
+Log Time: 19-10-2019 12:53:09pm
+TypeError: Return value of DBConnection::userAuthentication() must be of the type array, object returned in C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php:208
+Stack trace:
+#0 C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php(44): DBConnection::userAuthentication('0123444667', '4563')
+#1 C:\xampp\htdocs\integration2\src\authentication\authentication.php(30): DBConnection::accountInformationProvider('0123444667', '4563')
+#2 C:\xampp\htdocs\integration2\src\controller.php(41): Operation\Authentication->login()
+#3 {main}
+
+Log Time: 19-10-2019 13:57:58pm
+Error: Call to a member function ping() on null in C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php:21
+Stack trace:
+#0 C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php(154): DBConnection::getInstance()
+#1 C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php(44): DBConnection::userAuthentication('0123444667', '4563')
+#2 C:\xampp\htdocs\integration2\src\authentication\authentication.php(30): DBConnection::accountInformationProvider('0123444667', '4563')
+#3 C:\xampp\htdocs\integration2\src\controller.php(41): Operation\Authentication->login()
+#4 {main}
+
+Log Time: 19-10-2019 14:11:48pm
+Error: Using $this when not in object context in C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php:152
+Stack trace:
+#0 C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php(41): DBConnection::userAuthentication('0123444667', '4563')
+#1 C:\xampp\htdocs\integration2\src\authentication\authentication.php(30): DBConnection::accountInformationProvider('0123444667', '4563')
+#2 C:\xampp\htdocs\integration2\src\controller.php(41): Operation\Authentication->login()
+#3 {main}
+
+Log Time: 19-10-2019 14:16:09pm
+Error: Using $this when not in object context in C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php:152
+Stack trace:
+#0 C:\xampp\htdocs\integration2\src\serviceauthentication\DBConnection.php(41): DBConnection::userAuthentication('0123444667', '4563')
+#1 C:\xampp\htdocs\integration2\src\authentication\authentication.php(30): DBConnection::accountInformationProvider('0123444667', '4563')
+#2 C:\xampp\htdocs\integration2\src\controller.php(41): Operation\Authentication->login()
+#3 {main}
+
+Log Time: 13-11-2020 19:37:10pm
+Error: Class 'Operation\ServiceAuthentication' not found in C:\xampp\htdocs\src\billpayment\billpayment.php:10
+Stack trace:
+#0 C:\xampp\htdocs\src\controller.php(54): Operation\billpayment->__construct('0123456789')
+#1 {main}
+
+Log Time: 13-11-2020 19:38:05pm
+Error: Class 'Operation\ServiceAuthentication' not found in C:\xampp\htdocs\src\billpayment\billpayment.php:10
+Stack trace:
+#0 C:\xampp\htdocs\src\controller.php(54): Operation\billpayment->__construct('0123456789')
+#1 {main}
+
+Log Time: 13-11-2020 19:41:04pm
+Error: Class 'Operation\ServiceAuthentication' not found in C:\xampp\htdocs\src\billpayment\billpayment.php:12
+Stack trace:
+#0 C:\xampp\htdocs\src\controller.php(54): Operation\billpayment->__construct('0123456789')
+#1 {main}
+
+Log Time: 13-11-2020 19:43:35pm
+Error: Class 'Operation\ServiceAuthentication' not found in C:\xampp\htdocs\src\billpayment\billpayment.php:11
+Stack trace:
+#0 C:\xampp\htdocs\src\controller.php(54): Operation\billpayment->__construct('0123456789')
+#1 {main}
+
+Log Time: 13-11-2020 19:44:38pm
+Error: Class 'Operation\ServiceAuthentication' not found in C:\xampp\htdocs\src\billpayment\billpayment.php:12
+Stack trace:
+#0 C:\xampp\htdocs\src\controller.php(54): Operation\billpayment->__construct('0123456789')
+#1 {main}
+
+Log Time: 13-11-2020 19:45:44pm
+TypeError: Argument 1 passed to ServiceAuthentication::accountAuthenticationProvider() must be of the type string, null given, called in C:\xampp\htdocs\src\billpayment\billpayment.php on line 15 and defined in C:\xampp\htdocs\src\serviceauthentication\serviceauthentication.php:7
+Stack trace:
+#0 C:\xampp\htdocs\src\billpayment\billpayment.php(15): ServiceAuthentication::accountAuthenticationProvider(NULL)
+#1 C:\xampp\htdocs\src\controller.php(55): Operation\billpayment->getBill('waterCharge')
+#2 {main}
+

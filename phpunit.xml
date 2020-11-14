@@ -1,0 +1,19 @@
+<phpunit>
+    <testsuites>
+        <testsuite name="Deposit">
+            <directory suffix="Test.php">test/Deposit</directory>
+        </testsuite>
+    </testsuites>
+    <!--
+    <testsuites>
+        <testsuite name="Operation">
+            <directory suffix="Test.php">test</directory>
+        </testsuite>
+        
+        <testsuite name="Output">
+            <directory suffix="Test.php">test</directory>
+        </testsuite>
+       
+    </testsuites>
+     -->
+</phpunit>
