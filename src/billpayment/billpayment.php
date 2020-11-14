@@ -17,7 +17,7 @@ class billpayment{
         $response["message"] = "";
       }
       catch(Error $e){
-        $response["message"] = "Unknown error occurs in BillPaymentInq";
+        $response["message"] = "Unknown error occurs in BillPaymentInq _testt_";
         $response["isError"] = true;
       }
       return $response;
