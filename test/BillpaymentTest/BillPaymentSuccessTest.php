@@ -6,10 +6,11 @@ use Operation\billpayment;
 require_once __DIR__.'./../../src/billpayment/billpayment.php';
 
 final class BillPaymentSuccessTest extends TestCase {
+
     public function stubAccountDetail( $accNo, $billType, $expect ) {
         $stub = $this->getMockBuilder( billpayment::class )
-        ->setConstructorArgs( ['acctNo'=>$accNo] )
-        ->setMethods( array( 'getAccountDetail' ) )
+        ->setConstructorArgs( ['acctNo'=>'1234567890'] )
+        ->setMethods( array( 'getAccountDetail', 'saveChargeTransaction', 'saveTransaction' ) )
         ->getMock();
 
         $stub->method( 'getAccountDetail' )
@@ -18,42 +19,67 @@ final class BillPaymentSuccessTest extends TestCase {
             'accBalance' => $expect['accBalance'], 'accName' => $expect['accName']
             , 'isError' => $expect['isError'], 'message' => $expect['message'] ) );
 
+            $stub->method( 'saveChargeTransaction' )
+            ->willReturn( true );
+
+            $stub->method( 'saveTransaction' )
+            ->willReturn( true );
+
             return $stub;
         }
 
         /**
-        * add DataProvider
-        *
         * @dataProvider billPaymentProvider
-        *
         */
 
-        public function testCanGetBill( $accNo, $billType, $expect ) {
+        // public function testCanGetBillStub( $accNo, $billType, $expect ) {
 
-            $stub = $this->stubAccountDetail( $accNo, $billType, $expect );
+        //     $stub = $this->stubAccountDetail( $accNo, $billType, $expect );
 
-            $result = $stub->getBill( $accNo );
-            $this->assertEquals( $expect, $result );
-        }
+        //     $result = $stub->getBill( $accNo );
 
-          /**
-        * add DataProvider
-        *
+        //     $this->assertEquals( $expect, $result );
+        // }
+
+        /**
         * @dataProvider billPaymentProvider
-        *
         */
 
-        // public function testCanPay( $accNo, $billType, $expect ) {
+        // public function testCanPayStub( $accNo, $billType, $expect ) {
 
         //     $stub = $this->stubAccountDetail( $accNo, $billType, $expect );
 
         //     $result = $stub->pay( $billType );
+
+        //     $expected = array( 'isError'=>$expect['isError'], 'message'=>$expect['message'] );
+
+        //     $this->assertEquals( $expected, $result );
+        // }
+
+        /**
+        * @dataProvider billPaymentProvider
+        */
+
+        // public function testCanGetBillReal( $accNo, $billType, $expect ) {
+
+        //     $data = new billpayment( $accNo );
+        //     $result = $data->getBill( $accNo );
+
         //     $this->assertEquals( $expect, $result );
         // }
 
-        // public function testCanGetCorrecPayment( $accNo, $billType, $expect ) {
-        //     $result = new billpayment();
-        //     $this->assertEquals( null, $result->pay( $billType ) );
+        /**
+        * @dataProvider billPaymentProvider
+        */
+
+        // public function testCanPayReal( $accNo, $billType, $expect ) {
+
+        //     $data = new billpayment( $accNo );
+        //     $result = $data->pay( $billType );
+
+        //     $expected = array( 'isError'=>$expect['isError'], 'message'=>$expect['message'] );
+
+        //     $this->assertEquals( $expected, $result );
         // }
 
         public function billPaymentProvider() {
