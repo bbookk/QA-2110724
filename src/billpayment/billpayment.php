@@ -13,7 +13,7 @@ class billpayment {
     private $accNo = '';
 
     public function __construct( string $accNo ) {
-        $this->$accNo = $accNo;
+        $this->accNo = $accNo;
     }
 
     public function getAccountDetail( string $accNo ) : array {
@@ -35,13 +35,13 @@ class billpayment {
     }
 
     public function getBill( string $accNo ) {
-        if ( strlen( $this->$accNo ) != 10 ) {
+        if ( strlen( $this->accNo ) != 10 ) {
             $response['message'] = 'Invalid Account no.';
             $response['isError'] = true ;
             return $response;
         } else {
             try {
-                $arrayAccount = $this->getAccountDetail( $this->$accNo );
+                $arrayAccount = $this->getAccountDetail( $this->accNo );
                 $response['accNo'] = $arrayAccount['accNo'];
                 $response['accName'] = $arrayAccount['accName'];
                 $response['accBalance'] = $arrayAccount['accBalance'];
@@ -62,7 +62,8 @@ class billpayment {
             $response['message'] = 'Invalid bill type';
             return $response;
         } else {
-            $arrayAccount = $this->getBill( $this->$accNo );
+
+            $arrayAccount = $this->getBill( $this->accNo );
 
             if ( ( $arrayAccount['accBalance'] < $arrayAccount['accWaterCharge'] ) ||
             ( $arrayAccount['accBalance'] < $arrayAccount['accElectricCharge'] ) ||
@@ -76,10 +77,10 @@ class billpayment {
                     $updatedBalance = $arrayAccount['accBalance'] - $arrayAccount['accWaterCharge'];
 
                     try {
-                        $this->saveTransaction( $this->$accNo, $updatedBalance );
-                        $this->saveChargeTransaction( $this->$accNo, $bill_type );
+                        $this->saveTransaction( $this->accNo, $updatedBalance );
+                        $this->saveChargeTransaction( $this->accNo, $bill_type );
 
-                        // $arrayAccount = $this->getAccountDetail( $this->$accNo );
+                        // $arrayAccount = $this->getAccountDetail( $this->accNo );
                         $response['accNo'] = $arrayAccount['accNo'];
                         $response['accName'] = $arrayAccount['accName'];
                         $response['accBalance'] = $arrayAccount['accBalance'];
@@ -94,10 +95,10 @@ class billpayment {
                     $updatedBalance = $arrayAccount['accBalance'] - $arrayAccount['accElectricCharge'];
 
                     try {
-                        $this->saveTransaction( $this->$accNo, $updatedBalance );
-                        $this->saveChargeTransaction( $this->$accNo, $bill_type );
+                        $this->saveTransaction( $this->accNo, $updatedBalance );
+                        $this->saveChargeTransaction( $this->accNo, $bill_type );
 
-                        $response = ServiceAuthentication::accountAuthenticationProvider( $this->$accNo );
+                        $response = ServiceAuthentication::accountAuthenticationProvider( $this->accNo );
                         $response['isError'] = false;
                         $response['message'] = '';
                     } catch( Error $e ) {
@@ -109,10 +110,10 @@ class billpayment {
                     $updatedBalance = $arrayAccount['accBalance'] - $arrayAccount['accPhoneCharge'];
 
                     try {
-                        $this->saveTransaction( $this->$accNo, $updatedBalance );
-                        $this->saveChargeTransaction( $this->$accNo, $bill_type );
+                        $this->saveTransaction( $this->accNo, $updatedBalance );
+                        $this->saveChargeTransaction( $this->accNo, $bill_type );
 
-                        $response = ServiceAuthentication::accountAuthenticationProvider( $this->$accNo );
+                        $response = ServiceAuthentication::accountAuthenticationProvider( $this->accNo );
                         $response['isError'] = false;
                         $response['message'] = '';
                     } catch( Error $e ) {
