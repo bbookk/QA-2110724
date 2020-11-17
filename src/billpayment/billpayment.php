@@ -20,11 +20,11 @@ class billpayment {
         return ServiceAuthentication::accountAuthenticationProvider( $accNo );
     }
 
-    public function saveTransaction( string $accNo ) : array {
+    public function saveTransaction( string $accNo ) : bool {
         return DBConnection::saveTransaction( $accNo, $updatedBalance );
     }
 
-    public function saveChargeTransaction( string $accNo, string $bill_type ) : array {
+    public function saveChargeTransaction( string $accNo, string $bill_type ) : bool {
         if ( $bill_type == 'waterCharge' ) {
             return DBConnection::saveTransactionWaterCharge( $accNo, 0 );
         } else  if ( $bill_type == 'electricCharge' ) {
@@ -84,6 +84,7 @@ class billpayment {
                         $response['accNo'] = $arrayAccount['accNo'];
                         $response['accName'] = $arrayAccount['accName'];
                         $response['accBalance'] = $arrayAccount['accBalance'];
+                        $response['accWaterCharge'] = $arrayAccount['accWaterCharge'];
                         $response['isError'] = false;
                         $response['message'] = '';
                     } catch( Error $e ) {
@@ -98,7 +99,11 @@ class billpayment {
                         $this->saveTransaction( $this->accNo, $updatedBalance );
                         $this->saveChargeTransaction( $this->accNo, $bill_type );
 
-                        $response = ServiceAuthentication::accountAuthenticationProvider( $this->accNo );
+                        // $response = ServiceAuthentication::accountAuthenticationProvider( $this->accNo );
+                        $response['accNo'] = $arrayAccount['accNo'];
+                        $response['accName'] = $arrayAccount['accName'];
+                        $response['accBalance'] = $arrayAccount['accBalance'];
+                        $response['accElectricCharge'] = $arrayAccount['accElectricCharge'];
                         $response['isError'] = false;
                         $response['message'] = '';
                     } catch( Error $e ) {
@@ -113,7 +118,11 @@ class billpayment {
                         $this->saveTransaction( $this->accNo, $updatedBalance );
                         $this->saveChargeTransaction( $this->accNo, $bill_type );
 
-                        $response = ServiceAuthentication::accountAuthenticationProvider( $this->accNo );
+                        // $response = ServiceAuthentication::accountAuthenticationProvider( $this->accNo );
+                        $response['accNo'] = $arrayAccount['accNo'];
+                        $response['accName'] = $arrayAccount['accName'];
+                        $response['accBalance'] = $arrayAccount['accBalance'];
+                        $response['accPhoneCharge'] = $arrayAccount['accPhoneCharge'];
                         $response['isError'] = false;
                         $response['message'] = '';
                     } catch( Error $e ) {
