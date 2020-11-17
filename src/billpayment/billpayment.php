@@ -84,12 +84,10 @@ class billpayment {
             }
             if ( $arrayAccount['accBalance'] >= $arrayAccount[$accChargeType] ) {
                 $updatedBalance = $arrayAccount['accBalance'] - $arrayAccount[$accChargeType];
-
                 try {
                     $this->saveTransaction( $this->accNo, $updatedBalance );
                     $this->saveChargeTransaction( $this->accNo, $bill_type );
 
-                    // $arrayAccount = $this->getAccountDetail( $this->accNo );
                     $response = $this->getAccountDetail( $this->accNo );
                     $response['isError'] = false;
                     $response['message'] = '';
@@ -98,7 +96,6 @@ class billpayment {
                     $response['message'] = 'Unknown error occurs in BillPayment';
                 }
             }
-
             return $response;
         }
     }
