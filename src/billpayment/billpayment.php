@@ -25,7 +25,7 @@ class billpayment {
         return ServiceAuthentication::accountAuthenticationProvider( $accNo );
     }
 
-    public function saveTransaction( string $accNo ) : bool {
+    public function saveTransaction( string $accNo, string $updatedBalance ) : bool {
         return DBConnection::saveTransaction( $accNo, $updatedBalance );
     }
 
@@ -66,7 +66,7 @@ class billpayment {
             $response['message'] = 'Invalid bill type';
             return $response;
         } else {
-            $arrayAccount = $this->getAccountDetail( $this->accNo );
+         $arrayAccount = $this->getAccountDetail( $this->accNo );
 
             if ( $bill_type == 'waterCharge' ) {
                 if ( ( $arrayAccount['accBalance'] < $arrayAccount['accWaterCharge'] ) ) {
