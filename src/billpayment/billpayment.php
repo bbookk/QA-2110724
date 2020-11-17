@@ -17,6 +17,11 @@ class billpayment {
     }
 
     public function getAccountDetail( string $accNo ) : array {
+        if ( strlen( $this->accNo ) != 10 ) {
+            $response['message'] = 'Invalid Account no.';
+            $response['isError'] = true ;
+            return $response;
+        }
         return ServiceAuthentication::accountAuthenticationProvider( $accNo );
     }
 
@@ -35,25 +40,24 @@ class billpayment {
     }
 
     public function getBill( string $accNo ) {
-        if ( strlen( $this->accNo ) != 10 ) {
-            $response['message'] = 'Invalid Account no.';
-            $response['isError'] = true ;
-            return $response;
-        } else {
-            try {
-                $arrayAccount = $this->getAccountDetail( $this->accNo );
-                $response['accNo'] = $arrayAccount['accNo'];
-                $response['accName'] = $arrayAccount['accName'];
-                $response['accBalance'] = $arrayAccount['accBalance'];
-                $response['isError'] = false;
-                $response['message'] = '';
-            } catch( Error $e ) {
-                $response['message'] = 'Cannot get bill';
-                $response['isError'] = true;
-            }
 
-            return $response;
+        try {
+            $arrayAccount = $this->getAccountDetail( $this->accNo );
+            $response['accNo'] = $arrayAccount['accNo'];
+            $response['accName'] = $arrayAccount['accName'];
+            $response['accBalance'] = $arrayAccount['accBalance'];
+            $response['accWaterCharge'] = $arrayAccount['accWaterCharge'];
+            $response['accElectricCharge'] = $arrayAccount['accElectricCharge'];
+            $response['accPhoneCharge'] = $arrayAccount['accPhoneCharge'];
+            $response['isError'] = false;
+            $response['message'] = '';
+        } catch( Error $e ) {
+            $response['message'] = 'Cannot get bill';
+            $response['isError'] = true;
         }
+
+        return $response;
+
     }
 
     public function pay( string $bill_type ) {
@@ -63,7 +67,7 @@ class billpayment {
             return $response;
         } else {
 
-            $arrayAccount = $this->getBill( $this->accNo );
+            $arrayAccount = $this->getAccountDetail( $this->accNo );
 
             if ( ( $arrayAccount['accBalance'] < $arrayAccount['accWaterCharge'] ) ||
             ( $arrayAccount['accBalance'] < $arrayAccount['accElectricCharge'] ) ||
@@ -91,7 +95,7 @@ class billpayment {
                         $response['message'] = 'Unknown error occurs in BillPayment';
                     }
                 }
-            }else if ( $bill_type == 'electricCharge' ) {
+            } else if ( $bill_type == 'electricCharge' ) {
                 if ( $arrayAccount['accBalance'] >= $arrayAccount['accElectricCharge'] ) {
                     $updatedBalance = $arrayAccount['accBalance'] - $arrayAccount['accElectricCharge'];
 
@@ -110,7 +114,7 @@ class billpayment {
                         $response['message'] = 'Unknown error occurs in BillPayment';
                     }
                 }
-            }else if ( $bill_type == 'phoneCharge' ) {
+            } else if ( $bill_type == 'phoneCharge' ) {
                 if ( $arrayAccount['accBalance'] >= $arrayAccount['accPhoneCharge'] ) {
                     $updatedBalance = $arrayAccount['accBalance'] - $arrayAccount['accPhoneCharge'];
 
