@@ -17,8 +17,12 @@
     </testsuites>
      -->
      <testsuites>
-        <testsuite name="Output">
-            <directory suffix="Test.php">./test</directory>
+        <!-- <testsuite name="Output">
+            <directory suffix="Test.php">test/Output</directory>
+        </testsuite> -->
+
+        <testsuite name="BillPayment">
+            <directory suffix="Test.php">test/BillpaymentTest</directory>
         </testsuite>
     </testsuites>
 </phpunit>

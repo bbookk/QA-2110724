@@ -3,89 +3,107 @@
 use DBConnection;
 use ServiceAuthentication;
 
-class billpayment{
-    private $acctInfo;
+class billpayment {
+    private $accNo;
 
-    public function __construct(string $session){
-      $this->acctInfo = ServiceAuthentication::accountAuthenticationProvider($session);
+    public function __construct( string $accNo ) {
+        $this->$accNo = $accNo;
     }
 
-    public function getBill(string $bill_type){
-      try{
-        $response = ServiceAuthentication::accountAuthenticationProvider($this->acctInfo['accNo']);
-        $response["isError"] = false;
-        $response["message"] = "";
-      }
-      catch(Error $e){
-        $response["message"] = "Unknown error occurs in BillPaymentInq _test_";
-        $response["isError"] = true;
-      }
-      return $response;
+    public function getAccountDetail( string $accNo ) : array {
+        return ServiceAuthentication::accountAuthenticationProvider( $accNo );
     }
 
-    public function pay(string $bill_type){
+    public function saveTransaction( string $accNo ) : array {
+        return DBConnection::saveTransaction( $accNo, $updatedBalance );
+    }
 
-      $response["isError"] = true;
-      $response["message"] = "ยอดเงินในบัญชีไม่เพียงพอ";
+    public function saveChargeTransaction( string $accNo ) : array {
+        return DBConnection::saveTransactionWaterCharge( $accNo, 0 );
+    }
 
-      if($bill_type == 'waterCharge'){
-        if($this->acctInfo['accBalance'] >= $this->acctInfo['accWaterCharge']) {
-          $updatedBalance = $this->acctInfo['accBalance'] - $this->acctInfo['accWaterCharge'];
+    public function getBill( string $accNo ) {
+        if ( strlen( $this->$accNo ) != 10 ) {
+            $response['message'] = 'Invalid Account no.';
+            $response['isError'] = true ;
+            return $response;
+        } else {
+            try {
+                $arrayAccount = $this->getAccountDetail( $this->$accNo );
+                $response['accNo'] = $arrayAccount['accNo'];
+                $response['accName'] = $arrayAccount['accName'];
+                $response['accBalance'] = $arrayAccount['accBalance'];
+                $response['isError'] = false;
+                $response['message'] = '';
+            } catch( Error $e ) {
+                $response['message'] = 'Cannot get bill';
+                $response['isError'] = true;
+            }
 
-          try{
-            DBConnection::saveTransaction($this->acctInfo['accNo'], $updatedBalance);
-            DBConnection::saveTransactionWaterCharge($this->acctInfo['accNo'], 0);
-
-            $response = ServiceAuthentication::accountAuthenticationProvider($this->acctInfo['accNo']);
-            $response["isError"] = false;
-            $response["message"] = "";
-          }
-          catch(Error $e){
-            $response["message"] = "Unknown error occurs in BillPayment";
-          }
+            return $response;
         }
-      }
+    }
 
+    public function pay( string $bill_type ) {
+        $arrayAccount = $this->getAccountDetail( $this->$accNo );
+        $response['isError'] = true;
+        $response['message'] = 'ยอดเงินในบัญชีไม่เพียงพอ';
 
-      if($bill_type == 'electricCharge'){
-        if($this->acctInfo['accBalance'] >= $this->acctInfo['accElectricCharge']) {
-          $updatedBalance = $this->acctInfo['accBalance'] - $this->acctInfo['accElectricCharge'];
+        if ( $bill_type == 'waterCharge' ) {
+            if ( $arrayAccount['accBalance'] >= $arrayAccount['accWaterCharge'] ) {
+                $updatedBalance = $arrayAccount['accBalance'] - $arrayAccount['accWaterCharge'];
 
-          try{
-            DBConnection::saveTransaction($this->acctInfo['accNo'], $updatedBalance);
-            DBConnection::saveTransactionElectricCharge($this->acctInfo['accNo'], 0);
+                try {
+                    $this->saveTransaction( $this->$accNo, $updatedBalance );
+                    $this->saveTransaction( $this->$accNo, $updatedBalance );
 
-            $response = ServiceAuthentication::accountAuthenticationProvider($this->acctInfo['accNo']);
-            $response["isError"] = false;
-            $response["message"] = "";
-          }
-          catch(Error $e){
-            $response["message"] = "Unknown error occurs in BillPayment";
-          }
+                    // $arrayAccount = $this->getAccountDetail( $this->$accNo );
+                    $response['accNo'] = $arrayAccount['accNo'];
+                    $response['accName'] = $arrayAccount['accName'];
+                    $response['accBalance'] = $arrayAccount['accBalance'];
+                    $response['isError'] = false;
+                    $response['message'] = '';
+                } catch( Error $e ) {
+                    $response['message'] = 'Unknown error occurs in BillPayment';
+                }
+            }
         }
-      }
 
+        if ( $bill_type == 'electricCharge' ) {
+            if ( $arrayAccount['accBalance'] >= $arrayAccount['accElectricCharge'] ) {
+                $updatedBalance = $arrayAccount['accBalance'] - $arrayAccount['accElectricCharge'];
 
-      if($bill_type == 'phoneCharge'){
-        if($this->acctInfo['accBalance'] >= $this->acctInfo['accPhoneCharge']) {
-          $updatedBalance = $this->acctInfo['accBalance'] - $this->acctInfo['accPhoneCharge'];
+                try {
+                    DBConnection::saveTransaction( $this->$accNo, $updatedBalance );
+                    DBConnection::saveChargeTransaction( $this->$accNo, 0 );
 
-          try{
-            DBConnection::saveTransaction($this->acctInfo['accNo'], $updatedBalance);
-            DBConnection::saveTransactionPhoneCharge($this->acctInfo['accNo'], 0);
-
-            $response = ServiceAuthentication::accountAuthenticationProvider($this->acctInfo['accNo']);
-            $response["isError"] = false;
-            $response["message"] = "";
-          }
-          catch(Error $e){
-            $response["message"] = "Unknown error occurs in BillPayment";
-          }
+                    $response = ServiceAuthentication::accountAuthenticationProvider( $this->$accNo );
+                    $response['isError'] = false;
+                    $response['message'] = '';
+                } catch( Error $e ) {
+                    $response['message'] = 'Unknown error occurs in BillPayment';
+                }
+            }
         }
-      }
 
-      return $response;
+        if ( $bill_type == 'phoneCharge' ) {
+            if ( $arrayAccount['accBalance'] >= $arrayAccount['accPhoneCharge'] ) {
+                $updatedBalance = $arrayAccount['accBalance'] - $arrayAccount['accPhoneCharge'];
+
+                try {
+                    DBConnection::saveTransaction( $this->$accNo, $updatedBalance );
+                    DBConnection::saveTransactionPhoneCharge( $this->$accNo, 0 );
+
+                    $response = ServiceAuthentication::accountAuthenticationProvider( $this->$accNo );
+                    $response['isError'] = false;
+                    $response['message'] = '';
+                } catch( Error $e ) {
+                    $response['message'] = 'Unknown error occurs in BillPayment';
+                }
+            }
+        }
+
+        return $response;
     }
 }
-
 
