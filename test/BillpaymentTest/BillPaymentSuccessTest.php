@@ -9,7 +9,7 @@ final class BillPaymentSuccessTest extends TestCase {
 
     public function stubAccountDetail( $accNo, $billType, $expect ) {
         $stub = $this->getMockBuilder( billpayment::class )
-        ->setConstructorArgs( ['acctNo'=>'1234567890'] )
+        ->setConstructorArgs( ['acctNo'=>$accNo] )
         ->setMethods( array( 'getAccountDetail', 'saveChargeTransaction', 'saveTransaction' ) )
         ->getMock();
 
@@ -32,73 +32,71 @@ final class BillPaymentSuccessTest extends TestCase {
         * @dataProvider billPaymentProvider
         */
 
-        // public function testCanGetBillStub( $accNo, $billType, $expect ) {
+        public function testCanGetBillStub( $accNo, $billType, $expect ) {
 
-        //     $stub = $this->stubAccountDetail( $accNo, $billType, $expect );
+            $stub = $this->stubAccountDetail( $accNo, $billType, $expect );
 
-        //     $result = $stub->getBill( $accNo );
+            $result = $stub->getBill( $accNo );
 
-        //     $this->assertEquals( $expect, $result );
-        // }
-
-        /**
-        * @dataProvider billPaymentProvider
-        */
-
-        // public function testCanPayStub( $accNo, $billType, $expect ) {
-
-        //     $stub = $this->stubAccountDetail( $accNo, $billType, $expect );
-
-        //     $result = $stub->pay( $billType );
-
-        //     $expected = array( 'isError'=>$expect['isError'], 'message'=>$expect['message'] );
-
-        //     $this->assertEquals( $expected, $result );
-        // }
+            $this->assertEquals( $expect, $result );
+        }
 
         /**
         * @dataProvider billPaymentProvider
         */
 
-        // public function testCanGetBillReal( $accNo, $billType, $expect ) {
+        public function testCanPayStub( $accNo, $billType, $expect ) {
 
-        //     $data = new billpayment( $accNo );
-        //     $result = $data->getBill( $accNo );
+            $stub = $this->stubAccountDetail( $accNo, $billType, $expect );
 
-        //     $this->assertEquals( $expect, $result );
-        // }
+            $result = $stub->pay( $billType );
+
+            $this->assertEquals( $expect['isError'], $result['isError'] );
+        }
 
         /**
         * @dataProvider billPaymentProvider
         */
 
-        // public function testCanPayReal( $accNo, $billType, $expect ) {
+        public function testCanGetBillReal( $accNo, $billType, $expect ) {
 
-        //     $data = new billpayment( $accNo );
-        //     $result = $data->pay( $billType );
+            $data = new billpayment( $accNo );
+            $result = $data->getBill( $accNo );
 
-        //     $expected = array( 'isError'=>$expect['isError'], 'message'=>$expect['message'] );
+            $this->assertEquals( $expect, $result );
+        }
 
-        //     $this->assertEquals( $expected, $result );
-        // }
+        /**
+        * @dataProvider billPaymentProvider
+        */
+
+        public function testCanPayReal( $accNo, $billType, $expect ) {
+
+            $data = new billpayment( $accNo );
+            $result = $data->pay( $billType );
+
+            $expected = array( 'isError'=>$expect['isError'], 'message'=>$expect['message'] );
+
+            $this->assertEquals( $expected, $result );
+        }
 
         public function billPaymentProvider() {
             return [['1234567890', 'waterCharge',
             array( 'accNo' => '1234567890',
-            'accBalance' => 39000,
-            'accName' => 'Test 1',
+            'accBalance' => 2000,
+            'accName' => 'Wirot',
             'isError' => false,
             'message' => '' )],
             ['1234567890', 'electricCharge',
-            array( 'accNo' => '1234567890',
-            'accBalance' => 2000,
-            'accName' => 'Test 1',
+            array( 'accNo' => '6161616161',
+            'accBalance' => 2500,
+            'accName' => 'supachai',
             'isError' => false,
             'message' => '' )],
             ['1234567890', 'phoneCharge',
-            array( 'accNo' => '1234567890',
-            'accBalance' => 2000,
-            'accName' => 'Test 1',
+            array( 'accNo' => '2222222222',
+            'accBalance' => 55555,
+            'accName' => 'maytawee',
             'isError' => false,
             'message' => '' )]];
         }

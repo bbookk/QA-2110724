@@ -66,6 +66,11 @@ class billpayment {
             return $response;
         } else {
             $arrayAccount = $this->getAccountDetail( $this->accNo );
+
+            if($arrayAccount['isError'] == true){
+              return $arrayAccount;
+            }
+
             $accChargeType = '';
 
             if ( $bill_type == 'waterCharge' ) {
