@@ -7,39 +7,60 @@ require_once __DIR__.'./../../src/billpayment/billpayment.php';
 
 final class BillPaymentFailureTest extends TestCase {
 
-    /**
-    * add DataProvider
-    *
-    * @dataProvider billPaymentProvider
-    *
-    */
-
-    public function testCanGetBill( $accNo, $billType, $expect ) {
-
+    public function stubAccountDetail( $accNo, $billType, $expect ) {
         $stub = $this->getMockBuilder( billpayment::class )
         ->setConstructorArgs( ['acctNo'=>$accNo] )
-        ->setMethods( array( 'getAccountDetail' ) )
+        ->setMethods( array( 'getAccountDetail', 'saveChargeTransaction', 'saveTransaction' ) )
         ->getMock();
 
         $stub->method( 'getAccountDetail' )
         ->willReturn(
-            array( 'isError' => $expect['isError'], 'message' => $expect['message'] ) );
+            array( 'isError' => true, 'message' => $expect ) );
 
-            $result = $stub->getBill( $accNo );
-            $this->assertEquals( $expect, $result );
+            $stub->method( 'saveChargeTransaction' )
+            ->willReturn( false );
+
+            $stub->method( 'saveTransaction' )
+            ->willReturn( false );
+
+            return $stub;
         }
 
-        // public function testCanGetCorrecPayment( $accNo, $billType, $expect ) {
-        //     $result = new billpayment();
-        //     $this->assertEquals( null, $result->pay( $billType ) );
-        // }
+        public function testCanGetBillFailureStub( ) {
+            $accNo = '12345';
 
-        public function billPaymentProvider() {
-            return [['12345', 'waterCharge',
-            array( 
-            'isError' => true,
-            'message' => 'Invalid Account no.' )]
-            ];
+            $stub = $this->stubAccountDetail( $accNo, 'waterCharge', 'Invalid Account no.' );
+
+            $result = $stub->getBill( $accNo );
+
+            $this->assertEquals( 'Invalid Account no.', $result['message'] );
+        }
+
+        public function testCanPayFailureStub() {
+            $accNo = '1234567890';
+            $stub = $this->stubAccountDetail( $accNo, '', 'Invalid Account no.' );
+
+            $result = $stub->pay( '' );
+
+            $this->assertEquals( 'Invalid bill type', $result['message'] );
+        }
+
+        public function testCanGetBillFailureReal() {
+            $accNo = '12345';
+
+            $data = new billpayment( $accNo );
+            $result = $data->getBill( $accNo );
+
+            $this->assertEquals( 'Invalid Account no.', $result['message']);
+        }
+
+        public function testCanPayFailureReal() {
+            $accNo = '1234567890';
+
+            $data = new billpayment( $accNo );
+            $result = $data->pay( '' );
+
+            $this->assertEquals( 'Invalid bill type', $result['message'] );
         }
 
     }
