@@ -17,7 +17,7 @@ class billpayment {
     }
 
     public function getAccountDetail( string $accNo ) : array {
-        if ( strlen( $this->accNo ) != 10 ) {
+        if ( strlen( $accNo ) != 10 ) {
             $response['message'] = 'Invalid Account no.';
             $response['isError'] = true ;
             return $response;
@@ -42,13 +42,12 @@ class billpayment {
     public function getBill( string $accNo ) {
 
         try {
-            $arrayAccount = $this->getAccountDetail( $this->accNo );
-            $response['accNo'] = $arrayAccount['accNo'];
-            $response['accName'] = $arrayAccount['accName'];
-            $response['accBalance'] = $arrayAccount['accBalance'];
-            $response['accWaterCharge'] = $arrayAccount['accWaterCharge'];
-            $response['accElectricCharge'] = $arrayAccount['accElectricCharge'];
-            $response['accPhoneCharge'] = $arrayAccount['accPhoneCharge'];
+            $response = $this->getAccountDetail( $this->accNo );
+ 
+            if($response['isError'] == true){
+              return $response;
+            }
+
             $response['isError'] = false;
             $response['message'] = '';
         } catch( Error $e ) {
