@@ -44,9 +44,9 @@ class billpayment {
         try {
             $response = $this->getAccountDetail( $this->accNo );
  
-            if($response['isError'] == true){
-              return $response;
-            }
+            // if($response['isError'] == true){
+            //   return $response;
+            // }
 
             $response['isError'] = false;
             $response['message'] = '';
@@ -67,9 +67,9 @@ class billpayment {
         } else {
             $arrayAccount = $this->getAccountDetail( $this->accNo );
 
-            if($arrayAccount['isError'] == true){
-              return $arrayAccount;
-            }
+            // if($arrayAccount['isError'] == true){
+            //   return $arrayAccount;
+            // }
 
             $accChargeType = '';
 
