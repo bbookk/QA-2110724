@@ -157,7 +157,7 @@ final class BillPaymentSuccessTest extends TestCase {
 
         public function testRealTC_MB_04( $accNo, $billType, $expect ) {
 
-            $real = new billpayment( '1234567891' );
+            $real = new billpayment( $accNo );
 
             $result = $real->getBill( $billType );
 
