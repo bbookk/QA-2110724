@@ -9,7 +9,7 @@ final class BillPaymentSuccessTest extends TestCase {
 
     public function stubAccountDetail( $accNo, $billType, $expect ) {
         $stub = $this->getMockBuilder( billpayment::class )
-        ->setConstructorArgs( ['acctNo'=>$accNo] )
+        ->setConstructorArgs( ['accNo'=>$accNo] )
         ->setMethods( array( 'getAccountDetail', 'saveChargeTransaction', 'saveTransaction' ) )
         ->getMock();
 
@@ -31,125 +31,203 @@ final class BillPaymentSuccessTest extends TestCase {
             return $stub;
         }
 
-        /**
-        * @dataProvider billPaymentProvider
-        */
-
-        public function testCanGetBillStub( $accNo, $billType, $expect ) {
-
-            $stub = $this->stubAccountDetail( $accNo, $billType, $expect );
-
-            $result = $stub->getBill( $accNo );
-
-            $this->assertEquals( $expect, $result );
-        }
-
-        /**
-        * @dataProvider billPaymentProvider
-        */
-
-        public function testCanPayStub( $accNo, $billType, $expect ) {
-
-            $stub = $this->stubAccountDetail( $accNo, $billType, $expect );
-
-            $result = $stub->pay( $billType );
-
-            $this->assertEquals( $expect['isError'], $result['isError'] );
-        }
-
-        /**
-        * @dataProvider billPaymentProvider
-        */
-
-        public function testCanGetBillReal( $accNo, $billType, $expect ) {
-
-            $data = new billpayment( $accNo );
-            $result = $data->getBill( $accNo );
-
-            $this->assertEquals( $expect['isError'], $result['isError'] );
-        }
-
-        /**
-        * @dataProvider billPaymentProvider
-        */
-
-        public function testCanPayReal( $accNo, $billType, $expect ) {
-
-            $data = new billpayment( $accNo );
-            $result = $data->pay( $billType );
-
-            $this->assertEquals( $expect['isError'], $result['isError'] );
-        }
-
-        public function stubAccountDetailFailure() {
+        public function stubAccountDetailFailure( $accNo, $billType, $expect ) {
             $stub = $this->getMockBuilder( billpayment::class )
-            ->setConstructorArgs( ['acctNo'=>'1231231230'] )
+            ->setConstructorArgs( ['accNo'=>$accNo] )
             ->setMethods( array( 'getAccountDetail', 'saveChargeTransaction', 'saveTransaction' ) )
             ->getMock();
 
+            $stub->method( 'saveChargeTransaction' )
+            ->willReturn( false );
+
+            $stub->method( 'saveTransaction' )
+            ->willReturn( false );
+
+            return $stub;
+        }
+
+        //STUB
+        //TC_MB_01
+        
+        /**
+        * @dataProvider billPaymentProvider
+        */
+
+        public function testTC_MB_01( $accNo, $billType, $expect ) {
+
+            $stub = $this->stubAccountDetail( $accNo, $billType, $expect );
+
+            $result = $stub->getBill( $billType );
+
+            $this->assertEquals( $expect['accNo'], $result['accNo']);
+
+            $resultBill = $stub->pay( $billType );
+
+            $this->assertEquals( $expect['isError'], $resultBill['isError'] );
+        }
+
+        /**
+        * @dataProvider billPaymentFailureProvider
+        */
+
+        //TC_MB_02 and 03
+
+        public function testTC_MB_02( $accNo, $billType, $expect ) {
+
+            $stub = $this->stubAccountDetailFailure( $accNo, $billType, $expect );
+
             $stub->method( 'getAccountDetail' )
-            ->willReturn(
-                array( 'accNo' => '1231231230',
-                'accBalance' => 5000, 'accName' => 'narongtham',
-                'accWaterCharge' => 10000,
-                'accElectricCharge' => 10000,
-                'accPhoneCharge' => 10000
-                , 'isError' => true, 'message' => 'ยอดเงินในบัญชีไม่เพียงพอ' ) );
+            ->willReturn( 'ERROR' );
 
-                $stub->method( 'saveChargeTransaction' )
-                ->willReturn( false );
+            $result = $stub->getBill( $billType );
 
-                $stub->method( 'saveTransaction' )
-                ->willReturn( false );
+            $this->assertEquals( $expect, $result);
 
-                return $stub;
+            $resultBill = $stub->pay( $billType );
+
+            $this->assertEquals( $expect['message'], $resultBill['message'] );
+        }
+
+        /**
+        * @dataProvider billPaymentNoFlowProvider
+        */
+
+        //TC_MB_04 and 06
+
+        public function testTC_MB_04( $accNo, $billType, $expect ) {
+
+            $stub = $this->stubAccountDetailFailure( $accNo, $billType, $expect );
+
+            $stub->method( 'getAccountDetail' )
+            ->willReturn( $expect );
+
+            $result = $stub->getBill( $billType );
+
+            $this->assertEquals( $expect['accNo'], $result['accNo']);
+
+            $resultBill = $stub->pay( $billType );
+
+            $this->assertEquals( $expect['message'], $resultBill['message'] );
+        }
+
+        //REAL
+        //TC_MB_01
+
+        /**
+        * @dataProvider billPaymentProvider
+        */
+
+         public function testRealTC_MB_01( $accNo, $billType, $expect ) {
+
+            $real = new billpayment( $accNo );
+
+            $result = $real->getBill( $billType );
+
+            $this->assertEquals( $expect['accNo'], $result['accNo'] );
+
+            $resultBill = $real->pay( $billType );
+
+            $this->assertEquals( $expect['isError'], $resultBill['isError'] );
+        }
+
+        /**
+        * @dataProvider billPaymentFailureProvider
+        */
+
+        //TC_MB_02 and 03
+
+        public function testRealTC_MB_02( $accNo, $billType, $expect ) {
+
+            $real = new billpayment( $accNo );
+
+            $result = $real->getBill( $billType );
+
+            $this->assertEquals( $expect, $result );
+
+            $resultBill = $real->pay( '$billType' );
+
+            $this->assertEquals( $expect['message'], $resultBill['message'] );
+        }
+
+          /**
+        * @dataProvider billPaymentNoFlowProvider
+        */
+
+        //TC_MB_04 and 06
+
+        public function testRealTC_MB_04( $accNo, $billType, $expect ) {
+
+            $real = new billpayment( '1234567891' );
+
+            $result = $real->getBill( $billType );
+
+            $this->assertEquals( $expect['accNo'], $result['accNo'] );
+
+            $resultBill = $real->pay( $billType );
+
+            $this->assertEquals( $expect['message'], $resultBill['message'] );
+        }
+
+        public function billPaymentProvider() {
+            return [
+                ['1234567890', 'waterCharge',
+                array( 'accNo' => '1234567890',
+                'accBalance' => 2000,
+                'accWaterCharge' => 1000,
+                'accElectricCharge' => 2000,
+                'accPhoneCharge' => 3000,
+                'accName' => 'Wirot',
+                'isError' => false,
+                'message' => '' )],
+                ['6161616161', 'electricCharge',
+                array( 'accNo' => '6161616161',
+                'accBalance' => 2500,
+                'accWaterCharge' => 654,
+                'accElectricCharge' => 123,
+                'accPhoneCharge' => 5000,
+                'accName' => 'supachai',
+                'isError' => false,
+                'message' => '' )],
+                ['2222222222', 'phoneCharge',
+                array( 'accNo' => '2222222222',
+                'accBalance' => '55555',
+                'accWaterCharge' => '100',
+                'accElectricCharge' => '300',
+                'accPhoneCharge' => '800',
+                'accName' => 'maytawee',
+                'isError' => false,
+                'message' => '' )]];
             }
 
-            public function testCanPayFailureStub() {
-                $stub = $this->stubAccountDetailFailure();
-                $result =  $stub->pay( 'waterCharge' );
-
-                $this->assertEquals( 'ยอดเงินในบัญชีไม่เพียงพอ', $result['message'] );
-            }
-
-            public function testCanPayFailureReal() {
-                $accNo = '1231231230';
-
-                $data = new billpayment( $accNo );
-                $result = $data->pay( 'waterCharge' );
-
-                $this->assertEquals( 'ยอดเงินในบัญชีไม่เพียงพอ', $result['message'] );
-            }
-
-            public function billPaymentProvider() {
+            public function billPaymentFailureProvider() {
                 return [
-                    ['1234567890', 'waterCharge',
-                    array( 'accNo' => '1234567890',
-                    'accBalance' => 2000,
-                    'accWaterCharge' => 1000,
-                    'accElectricCharge' => 2000,
-                    'accPhoneCharge' => 3000,
-                    'accName' => 'Wirot',
-                    'isError' => false,
-                    'message' => '' )],
-                    ['6161616161', 'electricCharge',
-                    array( 'accNo' => '6161616161',
-                    'accBalance' => 2500,
-                    'accWaterCharge' => 654,
-                    'accElectricCharge' => 123,
-                    'accPhoneCharge' => 5000,
-                    'accName' => 'supachai',
-                    'isError' => false,
-                    'message' => '' )],
-                    ['2222222222', 'phoneCharge',
-                    array( 'accNo' => '2222222222',
-                    'accBalance' => 55555,
-                    'accWaterCharge' => 100,
-                    'accElectricCharge' => 300,
-                    'accPhoneCharge' => 800,
-                    'accName' => 'maytawee',
-                    'isError' => false,
-                    'message' => '' )]];
+                    ['12345678901', 'waterCharge',
+                    array( 'isError' => true,
+                    'message' => 'Invalid Account No' )],
+                    ['1235', 'electricCharge',
+                    array( 'isError' => true,
+                    'message' => 'Invalid Account No' )]];
                 }
 
-            }
+                public function billPaymentNoFlowProvider() {
+                    return [
+                        ['1231231230', 'waterCharge',
+                        array( 'accNo' => '1231231230',
+                        'accBalance' => '5000',
+                        'accWaterCharge' => '10000',
+                        'accElectricCharge' => '10000',
+                        'accPhoneCharge' => '10000',
+                        'accName' => 'narongtham',
+                        'isError' => true,
+                        'message' => 'ยอดเงินในบัญชีไม่เพียงพอ' )],
+                        ['2222222222', '',
+                        array( 'accNo' => '2222222222',
+                        'accBalance' => '55555',
+                        'accWaterCharge' => '100',
+                        'accElectricCharge' => '300',
+                        'accPhoneCharge' => '800',
+                        'accName' => 'maytawee',
+                        'isError' => true,
+                        'message' => 'Invalid bill type' )]];
+                    }
+                }

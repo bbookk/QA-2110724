@@ -16,11 +16,9 @@ class billpayment {
         $this->accNo = $accNo;
     }
 
-    public function getAccountDetail( string $accNo ) : array {
+    public function getAccountDetail( string $accNo ) {
         if ( strlen( $accNo ) != 10 ) {
-            $response['message'] = 'Invalid Account no.';
-            $response['isError'] = true ;
-            return $response;
+            return 'ERROR';
         }
         return ServiceAuthentication::accountAuthenticationProvider( $accNo );
     }
@@ -39,17 +37,19 @@ class billpayment {
         }
     }
 
-    public function getBill( string $accNo ) {
+    public function getBill( string $bill_type  ) {
 
         try {
-            $response = $this->getAccountDetail( $this->accNo );
- 
-            // if($response['isError'] == true){
-            //   return $response;
-            // }
+            $dataAccount = $this->getAccountDetail( $this->accNo );
 
-            $response['isError'] = false;
+            if($dataAccount == 'ERROR'){
+                $response['message'] = 'Invalid Account No';
+                $response['isError'] = true ;
+              return $response;
+            }
+            $response = $dataAccount;
             $response['message'] = '';
+            $response['isError'] = false;
         } catch( Error $e ) {
             $response['message'] = 'Cannot get bill';
             $response['isError'] = true;
@@ -67,9 +67,11 @@ class billpayment {
         } else {
             $arrayAccount = $this->getAccountDetail( $this->accNo );
 
-            // if($arrayAccount['isError'] == true){
-            //   return $arrayAccount;
-            // }
+            if($arrayAccount == 'ERROR'){
+                $response['message'] = 'Invalid Account No';
+                $response['isError'] = true ;
+              return $response;
+            }
 
             $accChargeType = '';
 
