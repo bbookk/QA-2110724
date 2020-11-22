@@ -36,9 +36,9 @@
       }
 
       else{
-        if($requestURI != "/main"){
-          header("Location: /main");
-        }
+        // if($requestURI != "/main"){
+        //   header("Location: /main");
+        // }
         include 'view/main.html';
       }
     }
