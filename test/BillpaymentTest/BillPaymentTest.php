@@ -110,6 +110,73 @@ final class BillPaymentSuccessTest extends TestCase {
             $this->assertEquals( $expect['message'], $resultBill['message'] );
         }
 
+        //STUB and Real
+        //TC_MB_01
+        
+        /**
+        * @dataProvider billPaymentProvider
+        */
+
+        public function testStubAndTC_MB_01( $accNo, $billType, $expect ) {
+
+            $real = new billpayment( $accNo );
+
+            $result = $real->getBill( $billType );
+
+            $this->assertEquals( $expect['accNo'], $result['accNo'] );
+
+            $stub = $this->stubAccountDetail( $accNo, $billType, $expect );
+
+            $resultBill = $stub->pay( $billType );
+
+            $this->assertEquals( $expect['isError'], $resultBill['isError'] );
+        }
+
+        /**
+        * @dataProvider billPaymentFailureProvider
+        */
+
+        //TC_MB_02 and 03
+
+        public function testStubAndTC_MB_02( $accNo, $billType, $expect ) {
+
+            $real = new billpayment( $accNo );
+
+            $result = $real->getBill( $billType );
+
+            $this->assertEquals( $expect, $result);
+
+            if($result['message'] == false){
+                $stub = $this->stubAccountDetail( $accNo, $billType, $expect );
+
+                $resultBill = $stub->pay( $billType );
+    
+                $this->assertEquals( $expect['message'], $resultBill['message'] );
+            }
+        }
+
+        /**
+        * @dataProvider billPaymentNoFlowProvider
+        */
+
+        //TC_MB_04 and 06
+
+        public function testStubAndTC_MB_04( $accNo, $billType, $expect ) {
+
+            $real = new billpayment( $accNo );
+
+            $result = $real->getBill( $billType );
+
+            $this->assertEquals( $expect['accNo'], $result['accNo'] );
+
+            $stub = $this->stubAccountDetail( $accNo, $billType, $expect );
+
+            $resultBill = $stub->pay( $billType );
+
+            $this->assertEquals( $expect['message'], $resultBill['message'] );
+        }
+
+
         //REAL
         //TC_MB_01
 
